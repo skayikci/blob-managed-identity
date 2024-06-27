@@ -35,11 +35,8 @@ public class BlobOperationsService {
     }
 
     public void uploadBlob(MultipartFile file) {
-
-        FileWriter writer = null;
-        try {
-            writer = new FileWriter(PATH + file.getOriginalFilename(), true);
-            writer.close();
+        try (FileWriter writer = new FileWriter(PATH + "/" + file.getOriginalFilename(), true))
+        {
             BlobContainerClient blobContainerClient = blobServiceClient.getBlobContainerClient(CONTAINER_NAME);
             BlobClient blobClient = blobContainerClient.getBlobClient(file.getOriginalFilename());
             // overrides content
