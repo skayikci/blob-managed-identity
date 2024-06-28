@@ -5,13 +5,16 @@
     2. Status > On > Click on : Save
 2. Now save your object (principal) id somewhere.
 3. Grant accesses to your blob
-    1. Now switch to your blob (or create one with default settings)
-    2. Access Control (IAM)
-    3. Add > Add Role Assignment > Select `Storage Blob Data Contributor'
-    4. On the members section > Managed Identity > +Select Members > Select the app that you have created (this one!, i
-       mean select the app that you just created managed identity for)
-    5. You can verify by going to Access control > Role Assignments > At the bottom > Storage Blob Data Contributor
+   1. Now switch to your blob (or create one with default settings)
+   2. Access Control (IAM)
+   3. Add > Add Role Assignment > Select ~~`Storage Blob Data Contributor'~~ (might not work for you too! see 4.)
+   4. `Storage Blob Data Owner' was the way to go for me!
+   5. On the members section > Managed Identity > +Select Members > Select the app that you have created (this one!, i
+      mean select the app that you just created managed identity for)
+   6. You can verify by going to Access control > Role Assignments > At the bottom > Storage Blob Data Contributor
 4. Let's try with postman!
+   1. Import postman collection under /docs
+   2. Fire requests to your remote server! (make sure to update the request urls according to your resource names!)
 
 ### Disclaimer Text
 

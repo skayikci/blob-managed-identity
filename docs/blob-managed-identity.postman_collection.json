@@ -1,0 +1,115 @@
+{
+  "info": {
+    "_postman_id": "bf7fb9a3-d35f-44e2-a7ae-92b1ae264594",
+    "name": "blob-managed-identity",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "26032002"
+  },
+  "item": [
+    {
+      "name": "BLOB - create container - REMOTE Copy",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "https://blobmanid.azurewebsites.net/v1/blob/container",
+          "protocol": "https",
+          "host": [
+            "blobmanid",
+            "azurewebsites",
+            "net"
+          ],
+          "path": [
+            "v1",
+            "blob",
+            "container"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "BLOB - create container - LOCAL Copy",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/v1/blob/container",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "v1",
+            "blob",
+            "container"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "BLOB - upload a file - LOCAL Copy",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "file",
+              "type": "file",
+              "src": "/Users/serhatkayikci/Downloads/A-56KB-Bitmap-Left-compared-to-a-10KB-JPEG-Image-Right.ppm"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:8080/v1/blob/file",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "v1",
+            "blob",
+            "file"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "BLOB - upload a file - REMOTE Copy",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "file",
+              "type": "file",
+              "src": "/Users/serhatkayikci/Downloads/A-56KB-Bitmap-Left-compared-to-a-10KB-JPEG-Image-Right.ppm"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:8080/v1/blob/file",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "v1",
+            "blob",
+            "file"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
