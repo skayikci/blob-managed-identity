@@ -1,5 +1,7 @@
 package com.demo.blobmanid;
 
+import java.io.IOException;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,7 +42,7 @@ public class BlobOperationsController {
      * @param file the file to upload
      */
     @PostMapping("/file")
-    public void uploadBlob(@RequestParam("file") MultipartFile file) {
+    public void uploadBlob(@RequestParam("file") MultipartFile file) throws IOException {
         blobOperationsService.uploadBlob(file);
     }
 }
