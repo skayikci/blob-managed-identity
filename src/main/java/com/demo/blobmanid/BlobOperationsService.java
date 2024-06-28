@@ -21,11 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RequiredArgsConstructor
 public class BlobOperationsService {
     /**
-     * The data path to keep the uploaded files locally
-     */
-    private static final String PATH = "./data";
-    /**
-     * The container name to be created,
+     * The container name to be created
      */
     private static final String CONTAINER_NAME = "container07061905";
     private final BlobServiceClient blobServiceClient;
