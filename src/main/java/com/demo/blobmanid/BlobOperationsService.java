@@ -1,10 +1,12 @@
 package com.demo.blobmanid;
 
-import java.io.FileWriter;
+import java.io.BufferedInputStream;
 import java.io.IOException;
+import java.util.Objects;
 
+import com.azure.identity.DefaultAzureCredentialBuilder;
 import com.azure.storage.blob.BlobClient;
-import com.azure.storage.blob.BlobContainerClient;
+import com.azure.storage.blob.BlobClientBuilder;
 import com.azure.storage.blob.BlobServiceClient;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,18 +36,26 @@ public class BlobOperationsService {
         log.debug("A container with name {} has been created", CONTAINER_NAME);
     }
 
-    public void uploadBlob(MultipartFile file) {
-        try (FileWriter writer = new FileWriter(PATH + "/" + file.getOriginalFilename(), true))
-        {
-            BlobContainerClient blobContainerClient = blobServiceClient.getBlobContainerClient(CONTAINER_NAME);
-            BlobClient blobClient = blobContainerClient.getBlobClient(file.getOriginalFilename());
-            // overrides content
-            blobClient.uploadFromFile(PATH + "/" + file.getOriginalFilename(), true);
-            log.debug("File written to blob successfully");
-        } catch (IOException ex) {
-            log.error("File can't be written {}", file.getOriginalFilename(), ex);
+    public void uploadBlob(MultipartFile file) throws IOException {
+        String endpoint = "https://testexample12318.blob.core.windows.net";
+        String blobName = file.getOriginalFilename();
+
+        Objects.requireNonNull(blobName, "'blobName' cannot be null.");
+        BlobClient blobClient = new BlobClientBuilder()
+                .endpoint(endpoint)
+                .containerName(CONTAINER_NAME)
+                .blobName(blobName)
+                .credential(new DefaultAzureCredentialBuilder().build())
+                .buildClient();
+
+        log.info(blobClient.getAccountName());
+
+        try (BufferedInputStream bis = new BufferedInputStream(file.getInputStream())) {
+            blobClient.upload(bis, file.getSize(), true);
+        } catch (IOException e) {
+            log.error("Exception while writing to blob", e);
+            e.printStackTrace();
+            throw e;
         }
-
-
     }
 }
